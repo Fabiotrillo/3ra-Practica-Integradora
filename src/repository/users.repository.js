@@ -15,8 +15,9 @@ class UserRepository {
       try {
            
           const user = await this.dao.getUserById(userId)
-       
-          return user;
+          const userDTO= new CreateUsersDto(user);
+          const userDtoFront= new GetUserDto(userDTO);
+          return userDtoFront;
 
       } catch (error) {
           throw new Error(`Error al obtener el usuario: ${error.message}`);

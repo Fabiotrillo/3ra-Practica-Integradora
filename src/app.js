@@ -4,6 +4,9 @@ import { engine } from 'express-handlebars';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import passport from 'passport';
+import { swaggerSpecs } from './config/swagger.config.js';
+import swaggerUI from "swagger-ui-express"
+
 
 import viewsRouter from './routes/views.router.js'
 import sessionRouter from './routes/sessions.router.js'
@@ -56,6 +59,9 @@ app.use("/api/carts", CartRouter);
 app.use("/api/products", ProductRouter);
 app.use("/api/users", UserRouter);
 app.use("/api/sessions", sessionRouter);
+
+//endpoint Doc swagger
+app.use("/api/docs",swaggerUI.serve,swaggerUI.setup(swaggerSpecs));
 
 
 app.use("/", mockingRoutes)
